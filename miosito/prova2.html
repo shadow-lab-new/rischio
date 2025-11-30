@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selezione del giorno</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: radial-gradient(circle at 20% 20%, #8b0000, transparent 60%),
+                radial-gradient(circle at 80% 30%, #b22222, transparent 70%),
+                radial-gradient(circle at 50% 80%, #800000, transparent 70%),
+                #330000;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 50px;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  h1 { margin-bottom: 20px; }
+
+  #ora {
+    font-size: 48px;
+    margin-bottom: 30px;
+  }
+
+  select {
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 2px solid #fff;
+    background: linear-gradient(145deg, #4b0082, #8b0000, #006400, #800080); /* arcobaleno scuro */
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  select:hover {
+    filter: brightness(1.2);
+  }
+
+  /* Brillantini */
+  .brillantini { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: -1; }
+  .brill {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: shine 2s infinite ease-in-out alternate, float 6s infinite linear;
+    filter: drop-shadow(0 0 6px white);
+  }
+  @keyframes shine { 0% { transform: scale(1); opacity: 0.4; } 100% { transform: scale(1.8); opacity: 1; } }
+  @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-40px); } }
+</style>
+</head>
+<body>
+
+<div class="brillantini"></div>
+
+<h1>✨✨Complimenti bravissima✨✨</h1>
+<div></div>
+<img src="gatto.png" alt="Immagine 3" style="position:absolute; bottom:10%; width:20%; height:25%;">
+
+<select id="giorni" style="
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 2px solid #fff;
+    background-color: #4b0082;  /* sfondo scuro uniforme visibile */
+    color: white;                /* testo leggibile */
+    cursor: pointer;
+    outline: none;
+">
+  <option value="" disabled selected>La baddie sceglie</option>
+  <option value="Lunedì">Lunedì</option>
+  <option value="Martedì">Martedì</option>
+  <option value="Mercoledì">Mercoledì</option>
+  <option value="Giovedì">Giovedì</option>
+  <option value="Venerdì">Venerdì</option>
+  <option value="Sabato">Sabato</option>
+  <option value="Domenica">Domenica</option>
+</select>
+
+<script>
+  // Genera brillantini
+  const containerB = document.querySelector(".brillantini");
+  for (let i = 0; i < 300; i++) {
+    const b = document.createElement("div");
+    b.className = "brill";
+    b.style.top = Math.random() * 100 + "%";
+    b.style.left = Math.random() * 100 + "%";
+    b.style.animationDelay = (Math.random() * 2) + "s";
+    containerB.appendChild(b);
+  }
+
+  // Orologio
+  function aggiornaOra() {
+    const oraEl = document.getElementById('ora');
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const s = String(now.getSeconds()).padStart(2,'0');
+    oraEl.textContent = `${h}:${m}:${s}`;
+  }
+  setInterval(aggiornaOra,1000);
+  aggiornaOra();
+</script>
+
+</body>
+</html>
